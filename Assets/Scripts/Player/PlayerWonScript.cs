@@ -24,9 +24,9 @@ public class PlayerWonScript : MonoBehaviour
         {
             PlayerWonPanel.SetActive(true);
 
-           Time.timeScale = 0f;
+        //    Time.timeScale = 0f;
 
-           Debug.Log("Time Scale = "+Time.timeScale);
+        //    Debug.Log("Time Scale = "+Time.timeScale);
         }
     }
 }

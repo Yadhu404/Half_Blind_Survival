@@ -13,7 +13,7 @@ public class PlayerPositionSet : MonoBehaviour
 
     private Vector2 playerTempPos;
 
-    public Vector2[] positionNearGate = {};
+    public Vector2[] retryPlayerPosition = {};
 
     private playerMove playerMove;
 
@@ -47,6 +47,12 @@ public class PlayerPositionSet : MonoBehaviour
         } 
     }
 
+    public void SetPotionOnHome()
+    {
+        playerMove.SavePlayerPosition(playerTempPos.x,playerTempPos.y);
+    }
+
+
 
     //On Game Retry
     public void SetPositionNearGate()
@@ -69,14 +75,20 @@ public class PlayerPositionSet : MonoBehaviour
             Dead_Panel.SetActive(false);
         }
 
-        if(playerMove.GetPlayerMapState() == "Map_One")
+        if(playerMove.GetPlayerMapState() == "Map_1")
         {
-            Player.transform.position = new Vector2(positionNearGate[0].x, positionNearGate[0].y);
+            Player.transform.position = new Vector2(retryPlayerPosition[0].x, retryPlayerPosition[0].y);
+            Player.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-        else if(playerMove.GetPlayerMapState() == "Map_Two")
+        else if(playerMove.GetPlayerMapState() == "Map_2")
         {
-            Player.transform.position = new Vector2(positionNearGate[1].x, positionNearGate[1].y);
-            // Player.transform.rotation = Quaternion.Euler(0, 0, -90);
+            Player.transform.position = new Vector2(retryPlayerPosition[1].x, retryPlayerPosition[1].y);
+            Player.transform.rotation = Quaternion.Euler(0, 0, -90);
+        }
+        else if(playerMove.GetPlayerMapState() == "Map_0")
+        {
+            Player.transform.position = new Vector2(retryPlayerPosition[2].x, retryPlayerPosition[2].y);
+            Player.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
 }

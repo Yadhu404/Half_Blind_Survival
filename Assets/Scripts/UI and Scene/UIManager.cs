@@ -5,17 +5,15 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public GameObject HomePage;
-    public GameObject SettingsPage;
     public GameObject PauseMenu;
     public GameObject ControlPage;
     public bool flag = true;
     // Start is called before the first frame update
     void Start()
     {
-        if(HomePage != null && SettingsPage != null){
-            HomePage.SetActive(true);
-            SettingsPage.SetActive(false);
-        }
+        // if(HomePage != null){
+        //     HomePage.SetActive(false);
+        // }
 
         if(PauseMenu != null){
             PauseMenu.SetActive(false);
@@ -43,14 +41,8 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void GotoSettingsPage(){
-        HomePage.SetActive(false);
-        SettingsPage.SetActive(true);
-    }
-
     public void GotoHomePage(){
         HomePage.SetActive(true);
-        SettingsPage.SetActive(false);
         ControlPage.SetActive(false);
     }
 

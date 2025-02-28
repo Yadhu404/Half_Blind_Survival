@@ -40,7 +40,9 @@ public class MapTwoObjectSpawner : MonoBehaviour
 
     public GameObject Player;
     private playerMove playerMove;
-    
+
+    public List<GameObject> removeObj_1 = new List<GameObject>();
+    private float mapTwoObjCount = 0;
 
     private int i = 0;
     // Start is called before the first frame update
@@ -63,7 +65,7 @@ public class MapTwoObjectSpawner : MonoBehaviour
     {
         if(flag0)
         {
-            if(playerDetectionSC.panel2 != null || playerMove.GetPlayerMapState() == "Map_Two")
+            if(playerDetectionSC.panel2 != null || playerMove.GetPlayerMapState() == "Map_2")
             {
                 medikitSpawnManager.SpawnMedkitMapTwo(); //Spawns medikit
                 
@@ -79,6 +81,10 @@ public class MapTwoObjectSpawner : MonoBehaviour
     public void SpawnMedikitMapTwo(float xPos, float yPos) 
     {
         GameObject med = Instantiate(Objects[3],new Vector3(xPos, yPos, 0),Quaternion.identity);
+
+        removeObj_1.Add(med);
+        mapTwoObjCount = removeObj_1.Count;
+
         med.transform.SetParent(MedkitObject.transform); 
     }
 
@@ -97,6 +103,9 @@ public class MapTwoObjectSpawner : MonoBehaviour
             GameObject caver_2O = Instantiate(Objects[0],new Vector3(posX[i],posY[i],0),Quaternion.identity);
             caver_2O.transform.SetParent(enemyParent2.transform);
 
+            removeObj_1.Add(caver_2O);
+            mapTwoObjCount = removeObj_1.Count;
+
             caver2O.Add(caver_2O);
         }
 
@@ -104,6 +113,10 @@ public class MapTwoObjectSpawner : MonoBehaviour
         for(int j = i;j < Caver_num + Caver_2O_num;j++)
         {
             GameObject caver = Instantiate(Objects[1],new Vector3(posX[j],posY[j],0),Quaternion.identity);
+
+            removeObj_1.Add(caver);
+            mapTwoObjCount = removeObj_1.Count;
+
             caver.transform.SetParent(enemyParent1.transform);
         }
     }
@@ -118,10 +131,25 @@ public class MapTwoObjectSpawner : MonoBehaviour
         {
             int index = Random.Range(0,GhostPosX.Length);
 
-            Instantiate(Objects[2], new Vector3(GhostPosX[index],GhostPosY[index],0),Quaternion.identity);
+            GameObject ghost = Instantiate(Objects[2], new Vector3(GhostPosX[index],GhostPosY[index],0),Quaternion.identity);
+
+            removeObj_1.Add(ghost);
+            mapTwoObjCount = removeObj_1.Count;
         }
 
         isGhostSpawn = true;
+    }
+
+    public void DespawnMapTwoObj()
+    {
+        for(int i = 0;i < mapTwoObjCount;i++)
+        {
+            Destroy(removeObj_1[i]);
+        }
+        removeObj_1.Clear();
+        caver2O.Clear();
+
+        isGhostSpawn = false;
     }
 
 

@@ -8,9 +8,11 @@ public class MainDoorTwo : MonoBehaviour
     public Transform DiamondasChild;
     public GameObject DiamondHolder;
     public GameObject Diamond;
+    public GameObject Player;
     public Light2D MapTwoDoorLamp;
     public GameObject PlayerDetecter;
     private PlayerDetectionSC playerDetectionSC;
+    private playerMove playerMove;
     private bool doorCheck = true;
     private DoorManager doorManager;
     // Start is called before the first frame update
@@ -21,6 +23,8 @@ public class MainDoorTwo : MonoBehaviour
         MapTwoDoorLamp.intensity = 0; //Initially no Light
 
         playerDetectionSC = PlayerDetecter.GetComponent<PlayerDetectionSC>();
+
+        playerMove = Player.GetComponent<playerMove>();
     }
 
     // Update is called once per frame
@@ -28,7 +32,7 @@ public class MainDoorTwo : MonoBehaviour
     {
         if(doorCheck)
         {
-            if(playerDetectionSC.panel2 != null)
+            if(playerDetectionSC.panel2 != null && (playerMove.GetPlayerMapState() == "Map_2"))
             {
                 doorManager.DoorClose();
                 doorCheck = false;

@@ -15,6 +15,9 @@ public class MaindoorSc : MonoBehaviour
     public AudioSource switchAudioSRC;
     private DoorManager doorManager;
     private MainDoorTwo mainDoorTwo;
+
+    public GameObject Player;
+    private playerMove playerMove;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,8 @@ public class MaindoorSc : MonoBehaviour
         mainDoorTwo = GameObject.Find("Map2 Main Door").GetComponent<MainDoorTwo>();
 
         playerDetectionSC = PlayerDetecter.GetComponent<PlayerDetectionSC>();
+
+        playerMove = Player.GetComponent<playerMove>();
     }
 
     // Update is called once per frame
@@ -68,8 +73,7 @@ public class MaindoorSc : MonoBehaviour
 
     void CheckPlayerInside()
     {
-        
-        if(playerDetectionSC.panel1 != null){
+        if(playerDetectionSC.panel1 != null && (playerMove.GetPlayerMapState() == "Map_1")){
             if(!check){
                 doorManager.DoorClose();
                 check1 = true;

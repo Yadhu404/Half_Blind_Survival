@@ -6,7 +6,8 @@ public class PlayerDetectionSC : MonoBehaviour
 {
     public Transform MapOneDoorPanel;
     public Transform MapTwoDoorPanel;
-    public Collider2D panel1,panel2;
+    public Transform MapOutDetectPanel;
+    public Collider2D panel1,panel2,panel3;
 
     private playerMove playerMove;
     // Start is called before the first frame update
@@ -22,15 +23,22 @@ public class PlayerDetectionSC : MonoBehaviour
         
         panel2 = Physics2D.OverlapBox(MapTwoDoorPanel.position,MapTwoDoorPanel.localScale,0f,LayerMask.GetMask("Player"));
 
+        panel3 = Physics2D.OverlapBox(MapOutDetectPanel.position,MapTwoDoorPanel.localScale,0f,LayerMask.GetMask("Player"));
+
 
         if(panel1 != null)
         {
-            playerMove.whichMap = "Map_One";
+            playerMove.whichMap = "Map_1";
             playerMove.SavePlayerMapState();
         }
         else if(panel2 != null)
         {
-            playerMove.whichMap = "Map_Two";
+            playerMove.whichMap = "Map_2";
+            playerMove.SavePlayerMapState();
+        }
+        else if(panel3 != null)
+        {
+            playerMove.whichMap = "Map_0";
             playerMove.SavePlayerMapState();
         }
     }

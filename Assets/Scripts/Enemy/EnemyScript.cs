@@ -120,7 +120,7 @@ public class EnemyScript : MonoBehaviour
     // Cast a single ray in the given direction
     void CastRay(Vector3 direction, int index)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, detectDistance, obstacleLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, detectDistance, LayerMask.GetMask("walls","Water"));
         hitPointer[index] = hit.collider != null;
     }
 

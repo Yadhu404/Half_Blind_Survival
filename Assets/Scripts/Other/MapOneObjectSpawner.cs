@@ -50,7 +50,7 @@ public class MapOneObjectSpawner : MonoBehaviour
     {
         if(flag0)
         {
-            if(playerDetectionSC.panel1 != null || playerMove.GetPlayerMapState() == "Map_One")
+            if(playerDetectionSC.panel1 != null || playerMove.GetPlayerMapState() == "Map_1")
             {
                 SpawnEnemyMapOne(); //Spawns enemies
                 medikitSpawnManager.SpawnMedkitMapOne(); //Spawns medkit

@@ -34,11 +34,11 @@ public class medikitSpawnManager : MonoBehaviour
             timer += Time.deltaTime;
             if(timer >= 10f){
 
-                if(playerMove.whichMap == "Map_One")
+                if(playerMove.whichMap == "Map_1")
                 {
                     SpawnMedkitMapOne();
                 }
-                else if(playerMove.whichMap == "Map_Two")
+                else if(playerMove.whichMap == "Map_2")
                 {
                     for(int i=0;i<2;i++)
                     {

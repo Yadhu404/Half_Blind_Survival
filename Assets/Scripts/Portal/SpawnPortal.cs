@@ -12,7 +12,7 @@ public class SpawnPortal : MonoBehaviour
 
     public float portalDetectDist;
 
-    private bool singleCheck = true;
+    public bool singleCheck = true;
 
     //Audio
     public AudioSource portalAudioSrc1;
