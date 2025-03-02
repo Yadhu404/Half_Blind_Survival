@@ -29,7 +29,7 @@ public class PlayerOutMap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Map State: "+playerMove.GetPlayerMapState());
+        // Debug.Log("Map State: "+playerMove.GetPlayerMapState());
         if(flag)
         {
             if(playerDetectionSC.panel3 != null || playerMove.GetPlayerMapState() == "Map_0")

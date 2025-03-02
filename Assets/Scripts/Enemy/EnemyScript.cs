@@ -81,7 +81,7 @@ public class EnemyScript : MonoBehaviour
             }
             else  if(shootPointcs.victimName.Contains("Ghost"))
             {
-                Debug.Log("Is Hidden : "+ ghostStaySet.isHidden);
+                // Debug.Log("Is Hidden : "+ ghostStaySet.isHidden);
                 if(!ghostStaySet.isHidden)
                 {
                     FacePlayer(ghost);
