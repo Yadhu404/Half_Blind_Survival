@@ -7,37 +7,18 @@ public class DamondScript : MonoBehaviour
 {
     public GameObject DiamondHolder;
     public float playerDetectDist = 1.5f;
-    // public AudioClip DiamondAudio;
-    private AudioSource DiamondSoundSRC;
-    // private bool oncePlaySound = false;
+
+    public static DamondScript instance;
     
     // Start is called before the first frame update
     void Start()
     {
-        DiamondSoundSRC = GetComponent<AudioSource>();
+        instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void Diamond_with_Player()
     {
-        Collider2D detectPlayer = Physics2D.OverlapCircle(transform.position,playerDetectDist,LayerMask.GetMask("Player"));
-
-        if(detectPlayer != null)
-        {
-            if(Input.GetKeyDown("e"))
-            {
-                gameObject.transform.SetParent(DiamondHolder.transform);
-                gameObject.SetActive(false);
-                //StartCoroutine(DisableGameObject());
-            }
-        }
-    }
-
-
-    IEnumerator DisableGameObject(){
-        yield return new WaitForSeconds(DiamondSoundSRC.clip.length);
-
         gameObject.transform.SetParent(DiamondHolder.transform);
-        gameObject.SetActive(false);
     }
 }

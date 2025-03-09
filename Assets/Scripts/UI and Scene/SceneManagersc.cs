@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagersc : MonoBehaviour
 {
+    public static SceneManagersc instance;
     // Start is called before the first frame update
     void Start()
     {
-        
+        instance = this;
     }
 
     // Update is called once per frame
@@ -17,10 +18,22 @@ public class SceneManagersc : MonoBehaviour
         
     }
 
-    public void Hometoloadscene(){
+    public void PlayOnNewGame()
+    {
         SceneManager.LoadScene("GameScene1"); //Loading from Load Scene to Game Scene
         Time.timeScale = 1f;
-        // StartCoroutine(LoadtogameScene());
+    }
+    public void NewGame(){
+        ResetSavedVariables.instance.ResetVariables();
+
+        SceneManager.LoadScene("GameScene1"); //Loading from Load Scene to Game Scene
+        Time.timeScale = 1f;
+    }
+
+    public void ContinueGame()
+    {
+        SceneManager.LoadScene("GameScene1"); //Loading from Load Scene to Game Scene
+        Time.timeScale = 1f;
     }
 
     private IEnumerator LoadtogameScene(){

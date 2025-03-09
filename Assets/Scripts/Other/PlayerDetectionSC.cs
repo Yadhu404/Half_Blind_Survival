@@ -25,18 +25,7 @@ public class PlayerDetectionSC : MonoBehaviour
 
         panel3 = Physics2D.OverlapBox(MapOutDetectPanel.position,MapTwoDoorPanel.localScale,0f,LayerMask.GetMask("Player"));
 
-
-        if(panel1 != null)
-        {
-            playerMove.whichMap = "Map_1";
-            playerMove.SavePlayerMapState();
-        }
-        else if(panel2 != null)
-        {
-            playerMove.whichMap = "Map_2";
-            playerMove.SavePlayerMapState();
-        }
-        else if(panel3 != null)
+        if(panel3 != null)
         {
             playerMove.whichMap = "Map_0";
             playerMove.SavePlayerMapState();

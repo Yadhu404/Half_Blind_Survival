@@ -73,10 +73,6 @@ public class ShootPointsc : MonoBehaviour
                     SpikeSpawn();
                 }
             }
-            // else
-            // {
-            //     spawnLaser();
-            // }
         }
         else{              //If player is not within the range
             flag = false;
@@ -99,10 +95,6 @@ public class ShootPointsc : MonoBehaviour
             timer += Time.deltaTime;
         }
         else {
-            // if(!ShootSound.isPlaying){
-            //     // ShootSound.Play();
-            // }
-            // // Debug.Log("SPIKE SPAWNED");
             GameObject spikeInstance = Instantiate(Spike, transform.position, transform.rotation);
             spikeInstance.GetComponent<SpikeScript>().SetShootPoint(this);
             timer = 0f;
@@ -118,15 +110,4 @@ public class ShootPointsc : MonoBehaviour
         }
         Instantiate(Laser, transform.position, transform.rotation);
     }
-
-    // void OnDrawGizmosSelected()
-    // {
-    //     if(flag){
-    //         Gizmos.color = Color.green;
-    //     }
-    //     else{
-    //         Gizmos.color = Color.red;
-    //     }
-    //     Gizmos.DrawWireSphere(Enemy.transform.position, playerDetectDist);
-    // }
 }

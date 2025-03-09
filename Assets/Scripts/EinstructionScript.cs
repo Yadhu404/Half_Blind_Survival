@@ -5,7 +5,8 @@ using UnityEngine;
 public class EinstructionScript : MonoBehaviour
 {
     public Transform Player;
-    private GameObject Einstruction;
+    public GameObject EtoPick;
+    public GameObject EtoOpen;
     public float detectDist = 1f;
     public string detectObject;
     public bool flag = false;
@@ -13,8 +14,7 @@ public class EinstructionScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Einstruction = GameObject.Find("Canvas/E instruction");
-        Einstruction.SetActive(false);
+        EtoPick.SetActive(false);
     }
 
     // Update is called once per frame
@@ -31,30 +31,30 @@ public class EinstructionScript : MonoBehaviour
             detectObject = detect.gameObject.name;
             flag = true;
 
-            ShowMessage();
+            if(detect.gameObject.name == "Door1" || detect.gameObject.name == "Door2" || detect.gameObject.name == "Door Switch")
+            {
+                ShowMessage(EtoOpen);
+            }
+            else if(detect.gameObject.name == "Note")
+            {
+                ShowMessage(EtoPick);
+            }
         }
-        else{
+        else if(flag){
+            detectObject = "";
             flag = false;
-            // detectObject = "No-Object";
+            ShowMessage(EtoPick);
+            ShowMessage(EtoOpen);
 
-            ShowMessage();
         }
     }
 
-    void ShowMessage(){
+    void ShowMessage(GameObject Einstr){
         if(flag){
-            Einstruction.SetActive(true);
+            Einstr.SetActive(true);
         }
         else{
-            Einstruction.SetActive(false);
+            Einstr.SetActive(false);
         }
-    }
-
-
-
-    void OnDrawGizmosSelected(){
-        Gizmos.color = Color.green;
-             
-        Gizmos.DrawWireSphere(Player.position, detectDist);
     }
 }

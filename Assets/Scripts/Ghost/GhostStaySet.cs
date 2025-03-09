@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class GhostStaySet : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class GhostStaySet : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     private GhostScreamSound ghostScreamSound;
+
+    public Light2D ghostLight;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,7 @@ public class GhostStaySet : MonoBehaviour
         Color newColor = spriteRenderer.color;
         newColor.a = 0f;
         spriteRenderer.color = newColor;
+        ghostLight.intensity = 0f;
     }
 
     // Update is called once per frame
@@ -52,6 +56,7 @@ public class GhostStaySet : MonoBehaviour
             newColor.g = 255f;
             newColor.b = 255f;
             spriteRenderer.color = newColor;
+            ghostLight.intensity = 1.7f;
 
            StartCoroutine(waitforTenSec());
         }
@@ -67,6 +72,8 @@ public class GhostStaySet : MonoBehaviour
 
         newColor.a = 0f;
         spriteRenderer.color = newColor;
+
+        ghostLight.intensity = 0f;
     }
     
 

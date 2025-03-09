@@ -23,8 +23,4 @@ public class enemySpawn : MonoBehaviour
             Instantiate(Enemy, transform.position, transform.rotation);
         }
     }
-    // Update is called once per frame
-    void Update()
-    {
-    }
 }

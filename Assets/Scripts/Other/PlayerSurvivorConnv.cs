@@ -22,25 +22,24 @@ public class PlayerSurvivorConnv : MonoBehaviour
     private int i = 0;
 
     //Chats
-    private String[] Conversation = {
+    private string[] Conversation = {
         "Heyy...Can you hear me ?",
         "Ahhg...Who are you ?",
-        "I was after you...",
-        "What ? After me...Ohh after me...",
+        "",
+        "Ohh....you survived in there...",
         "What happened ?",
         "I couldn't make this out.",
         "I can help you.",
         "No...no, you leave here, i don't think i can survive anymore....Its better ending up here.",
         "But...How can I leave you here...",
-        "There is a small base nearby...go find it. You can light up some paths in here...but be careful..its danger.",
-        "What...how do you know ?",
-        "You will find it out.",
+        "It's fine...There is a small base nearby...go find it. You can light up some paths in here...but be careful..its danger.",
+        "What is in there ?",
+        "Keep moving...You will find it out. Don't rest for longer time",
         "Okay...Ill find it...Thank you."
     };
     // Start is called before the first frame update
     void Start()
     {
-        Chat_Panel.SetActive(false);
         E_instruction.SetActive(false);
     }
 
@@ -68,28 +67,36 @@ public class PlayerSurvivorConnv : MonoBehaviour
                 }
                 else
                 {
-                    Chat_Panel.SetActive(false);
+                    playerConv.text = "";
+                    survivorConv.text = "";
                 }
             }
         }
         else
         {
             E_instruction.SetActive(false);
-            Chat_Panel.SetActive(false);
+            playerConv.text = "";
+            survivorConv.text = "";
+            i = 0;
         }
     }
 
     void ShowChats()   //Shows the conversations
     {
-        Chat_Panel.SetActive(true);
-
         if(i % 2 == 0)
         {
-            playerConv.text = "You: " + Conversation[i];
+            if(i == 2)
+            {
+                playerConv.text = "I am "+PlayerNameSet.instance.GetPlayerName()+", I was the next one to get in.";
+            }
+            else
+            {
+                playerConv.text = Conversation[i];
+            }
         }
         else
         {
-            survivorConv.text = "Survivor: " + Conversation[i];
+            survivorConv.text = Conversation[i];
         }
 
         i++;

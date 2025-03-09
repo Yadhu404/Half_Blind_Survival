@@ -5,9 +5,6 @@ using UnityEngine.Rendering.Universal;
 
 public class MainDoorTwo : MonoBehaviour
 {
-    public Transform DiamondasChild;
-    public GameObject DiamondHolder;
-    public GameObject Diamond;
     public GameObject Player;
     public Light2D MapTwoDoorLamp;
     public GameObject PlayerDetecter;
@@ -15,12 +12,17 @@ public class MainDoorTwo : MonoBehaviour
     private playerMove playerMove;
     private bool doorCheck = true;
     private DoorManager doorManager;
+
+
+    public static MainDoorTwo instance;
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
+
         doorManager = GetComponent<DoorManager>();
 
-        MapTwoDoorLamp.intensity = 0; //Initially no Light
+        MapTwoDoorLamp.intensity = 1;  //Puts on the lamp near Map 2
 
         playerDetectionSC = PlayerDetecter.GetComponent<PlayerDetectionSC>();
 
@@ -32,27 +34,23 @@ public class MainDoorTwo : MonoBehaviour
     {
         if(doorCheck)
         {
-            if(playerDetectionSC.panel2 != null && (playerMove.GetPlayerMapState() == "Map_2"))
+            if(playerMove.GetPlayerMapState() != "Map_2")
             {
-                doorManager.DoorClose();
-                doorCheck = false;
+                if(playerDetectionSC.panel2 != null)
+                {
+                    doorManager.DoorClose();
+                    doorCheck = false;
 
-                MapTwoDoorLamp.intensity = 0;  //Puts off the lamp near Map 2
-            }      
+                    MapTwoDoorLamp.intensity = 0;  //Puts off the lamp near Map 2
+
+                    playerMove.whichMap = "Map_2";
+                    playerMove.SavePlayerMapState();
+                } 
+            }     
         }
     }
-    public bool CheckDiamondwithPlayer()
+    public void DoorAndLampMap_2()
     {
-        DiamondasChild = DiamondHolder.transform.Find(Diamond.name); 
-
-        if(DiamondasChild != null)  //Checks if the Player has the Diamond
-        {
-            doorManager.DoorOpen();  //Opens the Door to Map 2
-
-            MapTwoDoorLamp.intensity = 1; //Puts on the lamp near Map 2
-
-            return false;
-        }
-        return true;
+        doorManager.DoorOpen();  //Opens the Door to Map 2
     }
 }

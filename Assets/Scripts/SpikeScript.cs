@@ -10,7 +10,6 @@ public class SpikeScript : MonoBehaviour
     public Vector3 PlayerRecentPos;
     public AudioSource shootSound;
     public float moveSpeed = 15f;
-    public float  timer = 0f;
 
     private GameObject Victim;
     private Vector3 direction;
@@ -41,8 +40,6 @@ public class SpikeScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Walls") || other.gameObject.CompareTag("ghost")){
-            // Debug.Log("Object Name = "+other.gameObject.name);
-            
             Destroy(gameObject);
         }    
     }
@@ -51,8 +48,6 @@ public class SpikeScript : MonoBehaviour
     void Update()
     {
         shootSound.Play();
-        // transform.position = Vector3.MoveTowards(transform.position, PlayerRecentPos,moveSpeed * Time.deltaTime);
-        // Debug.Log("TARGET NAME = "+ShootPoint.victimName);
         if(ShootPoint.victimName == "Player")
         {
             Victim = player;

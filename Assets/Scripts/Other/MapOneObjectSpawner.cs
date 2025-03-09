@@ -12,10 +12,6 @@ public class MapOneObjectSpawner : MonoBehaviour
     public float[] enemyPosX = {};
     public float[] enemyPosY = {};
 
-    //MediKit Positions
-    public float[] medPosX = {};
-    public float[] medPosY = {};
-
     public List<GameObject> removeObj = new List<GameObject>();
     private float mapOneObjCount = 0;
 
@@ -41,8 +37,6 @@ public class MapOneObjectSpawner : MonoBehaviour
         medikitSpawnManager = MedkitObject.GetComponent<medikitSpawnManager>();
 
         playerMove = Player.GetComponent<playerMove>();
-
-        // enemyParent = GameObject.Find("EnemyObj/Map_1");
     }
 
     // Update is called once per frame
@@ -53,7 +47,7 @@ public class MapOneObjectSpawner : MonoBehaviour
             if(playerDetectionSC.panel1 != null || playerMove.GetPlayerMapState() == "Map_1")
             {
                 SpawnEnemyMapOne(); //Spawns enemies
-                medikitSpawnManager.SpawnMedkitMapOne(); //Spawns medkit
+                medikitSpawnManager.SpawnMedkitMap_1(); //Spawns medkit
                 flag0 = false;
             }
         }
@@ -76,6 +70,7 @@ public class MapOneObjectSpawner : MonoBehaviour
     public void SpawnMedikitMapOne(float xPos, float yPos) //Spawns Medikit in Map 1
     {
         GameObject med = Instantiate(Objects[1],new Vector3(xPos, yPos, 0),Quaternion.identity);
+        med.name = Objects[1].name;
         med.transform.SetParent(MedikitObject.transform); 
 
         removeObj.Add(med);

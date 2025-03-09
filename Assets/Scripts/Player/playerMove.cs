@@ -10,8 +10,6 @@ public class playerMove : MonoBehaviour
     public float walkSpeed;
     public float runSpeed;
     public int PlayerHealth = 100;
-    public Camera cam;
-    public GameObject medKit;
     private Animator PlayerAnim;
     public bool isMoving;
     private bool Umove = false;
@@ -24,9 +22,12 @@ public class playerMove : MonoBehaviour
 
     public String whichMap = "";
     private float[] playerPos = {};
+
+    public static playerMove instance;
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         PlayerAnim = GetComponent<Animator>();
     }
 
@@ -34,109 +35,68 @@ public class playerMove : MonoBehaviour
     void Update()
     {
 
-        
         Vector3 moveDirection = Vector3.zero;   
-        
-        isMoving = false;
-        //Player to move front and back.
+    isMoving = false;
 
-        if(Input.GetKey(KeyCode.UpArrow)){
-            moveDirection += Vector3.up;
-            isMoving = true;
-            Umove = true;
-        }
-        else{
-            Umove = false;
-        }
+    // Player Movement Logic
+    if (Input.GetKey(KeyCode.UpArrow))
+    {
+        moveDirection += Vector3.up;
+        isMoving = true;
+        Umove = true;
+    }
+    else Umove = false;
 
-        if(Input.GetKey(KeyCode.DownArrow)){
-            moveDirection += Vector3.down;
-            isMoving = true;
-            Dmove = true;
-        }
-        else{
-            Dmove = false;
-        }
+    if (Input.GetKey(KeyCode.DownArrow))
+    {
+        moveDirection += Vector3.down;
+        isMoving = true;
+        Dmove = true;
+    }
+    else Dmove = false;
+
+    if (Input.GetKey(KeyCode.LeftArrow))
+    {
+        moveDirection += Vector3.left;
+        isMoving = true;
+        Lmove = true;
+    }
+    else Lmove = false;
+
+    if (Input.GetKey(KeyCode.RightArrow))
+    {
+        moveDirection += Vector3.right;
+        isMoving = true;
+        Rmove = true;
+    }
+    else Rmove = false;
+
+    transform.position += (moveDirection.normalized * playerSpeed) * Time.deltaTime;
+
+    // Increase speed when running
+    playerSpeed = (isMoving && Input.GetKey(KeyCode.LeftShift)) ? runSpeed : walkSpeed;
+
+    // **Fixed Animation Logic**
+    PlayerAnim.SetBool("isWalking", isMoving); // Use `SetBool` instead of `SetTrigger`
     
-        //Player to move left and right
+    Direction(); // Decide direction
 
-        if(Input.GetKey(KeyCode.LeftArrow)){
-            moveDirection += Vector3.left;
-            isMoving = true;
-            Lmove = true;
-        }
-        else{
-            Lmove = false;
-        }
+    if (!isMoving)
+    {
+        Lmove = Rmove = Umove = Dmove = false;
+    }
 
-        if(Input.GetKey(KeyCode.RightArrow)){
-            moveDirection += Vector3.right;
-            isMoving = true;
-            Rmove = true;
-        }
-        else{
-            Rmove = false;
-        }
-
-        transform.position += (moveDirection.normalized * playerSpeed) * Time.deltaTime;
-
-
-        //Increase the speed of the player by holding the shift key along with the key
-        if(isMoving && (Input.GetKey("left shift"))){
-            playerSpeed = runSpeed;
-        }
-        else{
-            playerSpeed = walkSpeed;
-        }
-
-        if(isMoving){
-            PlayerAnim.SetTrigger("PlayerWalk");
-        }
-        else{
-            PlayerAnim.ResetTrigger("PlayerWalk");
-            PlayerAnim.SetTrigger("PlayerIdle");
-        }
-
-        Direction(); //Decides the direction
-
-        if(!isMoving)
-        {
-            Lmove = Rmove = Umove = Dmove = false;
-        }
-
-        // Debug.Log("Player position --> "+transform.position);
-        // Debug.Log("Player Health : "+PlayerHealth);
-
-        if(PlayerHealth <= 0 && !isDead){
-            gameObject.SetActive(false);
-
-            isDead = !isDead;
-            // Debug.Log("Player Dead");
-        }
+    if (PlayerHealth <= 0 && !isDead)
+    {
+        gameObject.SetActive(false);
+        isDead = true;
+    }
        
     }
 
     void OnCollisionEnter2D(Collision2D player){
         if(player.gameObject.CompareTag("Spike")){  //Decrease the health by 1
             PlayerHealth -= 1;
-        }
-
-
-        if(player.gameObject.CompareTag("Medkit")){  //Regain health with medkit.
-            playerHitMedkit = true;
-
-            int RegainHealth = PlayerHealth + (PlayerHealth * 50 / 100);
-
-            if(RegainHealth >= 100){
-                PlayerHealth = 100;
-            }
-            else{
-                PlayerHealth = RegainHealth;
-            }
-        }
-
-        if(player.gameObject.CompareTag("weapon")){  //Taking the weapon.
-
         }
     }
 
@@ -168,6 +128,21 @@ public class playerMove : MonoBehaviour
         if(Dmove && Lmove){
             transform.rotation = Quaternion.Euler(0,0,135);
         }
+    }
+
+
+    public void PlayerHealthInc()
+    {
+        playerHitMedkit = true;
+
+            int RegainHealth = PlayerHealth + 50;
+
+            if(RegainHealth >= 100){
+                PlayerHealth = 100;
+            }
+            else{
+                PlayerHealth = RegainHealth;
+            }
     }
 
     public void SavePlayerPosition(float X, float Y)

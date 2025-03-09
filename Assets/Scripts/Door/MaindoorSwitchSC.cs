@@ -13,10 +13,4 @@ public class MaindoorSwitchSC : MonoBehaviour
         
         gameObject.transform.localPosition = new Vector2((float)switchPosX[randomNum],(float)switchPosY[randomNum]);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

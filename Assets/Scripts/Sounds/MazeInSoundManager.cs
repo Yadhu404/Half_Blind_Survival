@@ -30,17 +30,6 @@ public class MazeInSoundManager : MonoBehaviour
     {
         int audSrc = Random.Range(0,MazeInSound.Length);
         int audClip = Random.Range(0,MazeInClip.Length);
-
-        // if(audClip == MazeInClip.Length - 2 || audClip == MazeInClip.Length - 1)
-        // {
-        //     FootStepController(audSrc, audClip);
-        // }
-        // else
-        // {
-        //     MazeInSound[audSrc].clip = MazeInClip[audClip];
-        //     MazeInSound[audSrc].Play();
-        // }
-        // MazeInSound[audSrc].clip = MazeInClip[audClip];
         MazeInSound[audSrc].PlayOneShot(MazeInClip[audClip]);
     }
 

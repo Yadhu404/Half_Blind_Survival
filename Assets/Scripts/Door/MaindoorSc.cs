@@ -33,8 +33,7 @@ public class MaindoorSc : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DetectPlayer();
-        
+        DetectPlayer();  
     }
 
     void DetectPlayer(){
@@ -62,25 +61,29 @@ public class MaindoorSc : MonoBehaviour
 
         //To close the door once the Player got inside  the Maze
         CheckPlayerInside();
-
-        //To open the door to the MAP 2 if the player has the Diamond
-        if(flag)
-        {
-            flag = mainDoorTwo.CheckDiamondwithPlayer();
-        }
     }
 
 
     void CheckPlayerInside()
     {
-        if(playerDetectionSC.panel1 != null && (playerMove.GetPlayerMapState() == "Map_1")){
-            if(!check){
-                doorManager.DoorClose();
-                check1 = true;
-            }
+        if(playerMove.GetPlayerMapState() != "Map_1")
+        {
+            if(playerDetectionSC.panel1 != null){
+                if(!check){
+                    doorManager.DoorClose();
+                    check1 = true;
+                }
 
-            check = true;
-            flag = true;
+                check = true;
+                flag = true;
+
+                playerMove.whichMap = "Map_1";
+                playerMove.SavePlayerMapState();
+            }
+        }
+        else
+        {
+            check1 = true;
         }
     }
 }

@@ -7,20 +7,34 @@ public class PlayerNameSet : MonoBehaviour
 {
     public TMP_InputField playerName;
     public TextMeshProUGUI pName;
+
+    public static PlayerNameSet instance;
+
+    void Awake()
+    {
+        instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        pName.text = GetPlayerName();
+        if(pName != null)
+        {
+            pName.text = GetPlayerName();
+        }
     }
 
     //Save Player's name
     public void SetPlayerName()
     {
-        PlayerPrefs.SetString("Player_Name",playerName.text);
-        PlayerPrefs.Save();
 
-        pName.text = GetPlayerName();
-        Debug.Log("Player Name: "+GetPlayerName());
+        if(playerName.text != null)
+        {
+            PlayerPrefs.SetString("Player_Name",playerName.text);
+            PlayerPrefs.Save();
+
+            pName.text = GetPlayerName();
+        }
     }
 
     //Returns player's name

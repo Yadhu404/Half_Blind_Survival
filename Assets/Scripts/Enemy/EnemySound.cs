@@ -12,10 +12,4 @@ public class EnemySound : MonoBehaviour
         caverSoundsrc.clip = Clip;
         caverSoundsrc.Play();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

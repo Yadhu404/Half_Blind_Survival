@@ -10,7 +10,6 @@ public class EnemyScript : MonoBehaviour
     public float enemySpeed;
     public float detectDistance;
     public float jitterDistance;
-    public LayerMask obstacleLayer;
     private GameObject Player;
     private GameObject ghost;
     private MapTwoObjectSpawner mapTwoObjectSpawner;
@@ -234,36 +233,4 @@ public class EnemyScript : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, enemySpeed * Time.deltaTime);
         }
     }
-
-    // void OnDrawGizmosSelected()
-    // {
-    //     Gizmos.color = Color.green;
-    //     Gizmos.DrawLine(transform.position, transform.position + moveDirection * 2);
-    // }
 }
-
-
-
-
-
-// void DetectObstacleUD(){
-    //     RaycastHit2D hitup = Physics2D.Raycast(transform.position,Vector2.up, detectDistance, obstacleLayer);
-    //     RaycastHit2D hitdown = Physics2D.Raycast(transform.position,Vector2.down, detectDistance, obstacleLayer);
-
-
-    //     if(hitup) {
-    //         MoveDir = false;
-    //         Debug.Log("/|");
-    //     }
-    //     else{
-    //         if(hitdown){
-    //             MoveDir = true;
-    //             Debug.Log("|/");
-    //         }
-    //     }
-        
-    //     Vector3 directionUD = MoveDir? Vector2.up : Vector2.down;
-
-    //     transform.position = transform.position + (directionUD * enemySPeed) * Time.deltaTime;
-
-    // }

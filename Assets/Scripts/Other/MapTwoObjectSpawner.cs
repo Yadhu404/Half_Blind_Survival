@@ -55,9 +55,6 @@ public class MapTwoObjectSpawner : MonoBehaviour
         mapOneObjectSpawner = GameObject.Find("Map Objects Spawner/Map1").GetComponent<MapOneObjectSpawner>();
 
         medikitSpawnManager = MedkitObject.GetComponent<medikitSpawnManager>();
-
-        // enemyParent1 = GameObject.Find("EnemyObj/Map_2/CAVER");
-        // enemyParent2 = GameObject.Find("EnemyObj/Map_2/CAVER_2O");
     }
 
     // Update is called once per frame
@@ -67,7 +64,7 @@ public class MapTwoObjectSpawner : MonoBehaviour
         {
             if(playerDetectionSC.panel2 != null || playerMove.GetPlayerMapState() == "Map_2")
             {
-                medikitSpawnManager.SpawnMedkitMapTwo(); //Spawns medikit
+                medikitSpawnManager.SpawnMedkitMap_2(); //Spawns medikit
                 
                 SpawnEnemyMapTwo(); //Spawns enemies
                 SpawnGhost(); //Spawns ghosts
@@ -81,6 +78,7 @@ public class MapTwoObjectSpawner : MonoBehaviour
     public void SpawnMedikitMapTwo(float xPos, float yPos) 
     {
         GameObject med = Instantiate(Objects[3],new Vector3(xPos, yPos, 0),Quaternion.identity);
+        med.name = Objects[3].name;
 
         removeObj_1.Add(med);
         mapTwoObjCount = removeObj_1.Count;
@@ -94,7 +92,7 @@ public class MapTwoObjectSpawner : MonoBehaviour
     //Spawns Enemies
     void SpawnEnemyMapTwo()
     {
-        mapOneObjectSpawner.DespawnObject();  //Removes Enemy from Map 1
+        mapOneObjectSpawner.DespawnObject();  //Removes Objects from Map 1
 
         mapTwo = true;
         //Spawning Caver 2.O

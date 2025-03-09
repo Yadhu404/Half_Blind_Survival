@@ -8,6 +8,8 @@ public class PortalScript : MonoBehaviour
 
     public GameObject Player;
 
+    public GameObject panel;
+
     //Boolean
     private bool check = true;
     private bool check1 = true;
@@ -71,6 +73,7 @@ public class PortalScript : MonoBehaviour
 
         Player.SetActive(false);  //Player Disappears
 
+        panel.SetActive(true);
         yield return new WaitForSeconds(1.5f);
 
         Player.transform.position = spawnPortal.Portal[1].transform.position;

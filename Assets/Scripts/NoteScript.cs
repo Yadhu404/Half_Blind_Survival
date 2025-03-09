@@ -11,6 +11,10 @@ public class NoteScript : MonoBehaviour
     public EinstructionScript Einstructionflag;
     public EinstructionScript EinstrDetectObj;
     public MaindoorSc check;
+
+    public string hitObject;
+
+    private bool isNoteRead = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,12 +30,16 @@ public class NoteScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Debug.Log(EinstrDetectObj.detectObject);
-        if(EinstrDetectObj.detectObject == "Note"){
+        hitObject = EinstrDetectObj.detectObject;
+
+        isNoteRead = hitObject == "Note" ? true : false;
+       
+        if(isNoteRead)
+        {
             DisplayNote();
         }
 
-        if((EinstrDetectObj.detectObject == "Door1" || EinstrDetectObj.detectObject == "Door2") && Einstructionflag.flag){
+        if((hitObject == "Door1" || hitObject == "Door2") && Einstructionflag.flag){
             DoorMessage();
         }
         else{
@@ -45,15 +53,15 @@ public class NoteScript : MonoBehaviour
         if(Input.GetKeyDown("e")){
             NotePanel.SetActive(true);
 
-            Note.SetActive(false);
+            Time.timeScale = 0f;
         }
-        
-        
-        if(Input.GetKeyDown(KeyCode.Escape)){
-            Note.SetActive(true);
 
+        if(Input.GetKeyDown(KeyCode.Escape)){
             NotePanel.SetActive(false);
-        }   
+
+            isNoteRead = false;
+            Time.timeScale = 1f;
+        }
     }
 
     void DoorMessage(){

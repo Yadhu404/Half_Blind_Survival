@@ -7,12 +7,8 @@ public class SpawnPortal : MonoBehaviour
     public GameObject[] Portal = {};
     public Vector2[] portalPos = {};
     public List<GameObject> removePortal = new List<GameObject>();
-    public GameObject diamondHolder;
-    public GameObject redDiamond;
 
     public float portalDetectDist;
-
-    public bool singleCheck = true;
 
     //Audio
     public AudioSource portalAudioSrc1;
@@ -22,26 +18,19 @@ public class SpawnPortal : MonoBehaviour
     public AudioClip portalAudClip;
 
     public bool isPortalSpawn = false;
+
+    public static SpawnPortal instance;
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
+        
         portalMainAudSrc.clip = portalAudClip;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Transform DiamondasChild = diamondHolder.transform.Find(redDiamond.name);
-
-        if(singleCheck)
-        {
-            if(DiamondasChild !=  null)
-            {
-                Spawn_Portal();
-                singleCheck = !singleCheck;
-            }
-        }
-
         if(removePortal.Count == 0)
         {
             portalMainAudSrc.Stop();
@@ -49,7 +38,7 @@ public class SpawnPortal : MonoBehaviour
     }
 
 
-    void Spawn_Portal()   //Spawns the Portals when player gets the last Diamond
+    public void Spawn_Portal()   //Spawns the Portals when player gets the last Diamond
     {
         StartCoroutine(PlayPortalSound()); //Plays Portal Sound
 
@@ -80,11 +69,5 @@ public class SpawnPortal : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         portalMainAudSrc.Play();
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(Portal[0].transform.position, portalDetectDist);
     }
 }

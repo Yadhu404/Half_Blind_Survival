@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 7640186099873418643}
   - component: {fileID: 7842142839226063966}
   - component: {fileID: 3495142935619700717}
-  - component: {fileID: 2026952671692681270}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Med Kits
   m_TagString: Medkit
   m_Icon: {fileID: 0}
@@ -155,18 +154,6 @@ PolygonCollider2D:
       - {x: 1.1645755, y: 0.33842045}
       - {x: 1.1238236, y: 0.3813208}
   m_UseDelaunayMesh: 0
---- !u!114 &2026952671692681270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 59988918170028674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39572f5c41c8a504599620c13864424f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1716365314786683936
 GameObject:
   m_ObjectHideFlags: 0

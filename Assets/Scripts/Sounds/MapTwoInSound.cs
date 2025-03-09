@@ -46,6 +46,5 @@ public class MapTwoInSound : MonoBehaviour
         int audClip = Random.Range(0,MazeInClip.Length);
 
         MazeInSound[audSrc].PlayOneShot(MazeInClip[audClip]);
-        // Debug.Log(MazeInSound[audSrc]+" is playing "+MazeInClip[audClip]+" clip...");
     }
 }

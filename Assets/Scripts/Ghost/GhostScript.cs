@@ -45,6 +45,10 @@ public class GhostScript : MonoBehaviour
         {
             StartCoroutine(ghostScreamSound.CallScreamFn());
         }
+        else if(isPlayer != null)
+        {
+            ghostScreamSound.MakeSound();
+        }
 
         if(ghostScreamSound.canMove)
         {
@@ -73,7 +77,7 @@ public class GhostScript : MonoBehaviour
 
     void CastRay(Vector3 direction, int index)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, detectDistance, obstacleLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, detectDistance, LayerMask.GetMask("Water","walls"));
         
         hitPointer[index] = hit.collider != null;
     }
@@ -167,10 +171,4 @@ public class GhostScript : MonoBehaviour
     {
         transform.position += moveDirection * ghostSpeed * Time.deltaTime;
     }
-
-    // void OnDrawGizmosSelected()
-    // {
-    //     Gizmos.color = Color.green;
-    //     Gizmos.DrawLine(transform.position, transform.position + moveDirection * 2);
-    // }
 }

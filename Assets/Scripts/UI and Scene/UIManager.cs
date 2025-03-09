@@ -7,20 +7,22 @@ public class UIManager : MonoBehaviour
     public GameObject HomePage;
     public GameObject PauseMenu;
     public GameObject ControlPage;
+    public GameObject newGameConfirmationPanel;
     public bool flag = true;
     // Start is called before the first frame update
     void Start()
     {
-        // if(HomePage != null){
-        //     HomePage.SetActive(false);
-        // }
-
         if(PauseMenu != null){
             PauseMenu.SetActive(false);
         }
 
         if(ControlPage != null){
             ControlPage.SetActive(false);
+        }
+
+        if(newGameConfirmationPanel != null)
+        {
+            newGameConfirmationPanel.SetActive(false);
         }
     }
 
@@ -59,5 +61,37 @@ public class UIManager : MonoBehaviour
     public void ShowControls(){
         HomePage.SetActive(false);               //To show the controls
         ControlPage.SetActive(true);
+    }
+
+
+    public void ShowNewGameConfirmation()
+    {
+        if(GetGameState() == 0)
+        {
+            SaveGameState();
+            SceneManagersc.instance.PlayOnNewGame();
+        }
+        else if(GetGameState() == 1)
+        {
+            newGameConfirmationPanel.SetActive(true);
+        }
+    }
+
+    public void CloseNewGameConfirmation()
+    {
+        newGameConfirmationPanel.SetActive(false);
+    }
+
+
+
+    void SaveGameState()
+    {
+        PlayerPrefs.SetInt("GameState",1);
+        PlayerPrefs.Save();
+    }
+
+    public int GetGameState()
+    {
+        return PlayerPrefs.GetInt("GameState",0);
     }
 }

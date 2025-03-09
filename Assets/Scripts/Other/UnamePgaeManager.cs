@@ -8,38 +8,46 @@ public class UnamePgaeManager : MonoBehaviour
     public GameObject UnamePage;
     public GameObject HomePage;
 
+    public GameObject enterNameMessage;
+    private Animator enterNameShake;
 
-    private PlayerNameSet playerNameSet;
+
     // Start is called before the first frame update
     void Start()
     {
-        playerNameSet = GetComponent<PlayerNameSet>();
+        if(enterNameMessage.activeSelf)
+        {
+            enterNameShake = enterNameMessage.GetComponent<Animator>();
+        }
 
-        if(playerNameSet.GetPlayerName() == "")
+        if(PlayerNameSet.instance.GetPlayerName() == "")
         {
             UnamePage.SetActive(true);
+            HomePage.SetActive(false);
         }
         else
         {
+            UnamePage.SetActive(false);
             HomePage.SetActive(true);
         }
     }
 
     public void NameSet()
     {
-        UnamePage.SetActive(false);
-        HomePage.SetActive(true);
+        if(PlayerNameSet.instance.playerName.text != "")
+        {
+            UnamePage.SetActive(false);
+            HomePage.SetActive(true);
+        }
+        else
+        {
+            enterNameShake.SetTrigger("shake");
+        }
     }
 
     public void SetNewName()
     {
         UnamePage.SetActive(true);
         HomePage.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
