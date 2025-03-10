@@ -20,9 +20,9 @@ public class PlayerHealthbarsc : MonoBehaviour
     void Update()
     {
         //Changing the health bar of the player
-        playerhealthbar.value = playerhealth.PlayerHealth;
+        playerhealthbar.value = playerhealth.GetPlayerHealth();
 
         //Changing the player health count
-        playerhealthcount.text = playerhealth.PlayerHealth.ToString();
+        playerhealthcount.text = playerhealth.GetPlayerHealth().ToString();
     }
 }

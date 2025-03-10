@@ -40,12 +40,10 @@ public class TorchScript : MonoBehaviour
             torchOff = !torchOff;
 
             if(torchOff){
-                Debug.Log("Torch OFF");
                 torchLight.SetActive(false);
                 playerLight.SetActive(false);
             }
             else{
-                Debug.Log("Torch ON");
                 torchLight.SetActive(true);
                 playerLight.SetActive(true);
             }

@@ -27,6 +27,16 @@ public class MainDoorTwo : MonoBehaviour
         playerDetectionSC = PlayerDetecter.GetComponent<PlayerDetectionSC>();
 
         playerMove = Player.GetComponent<playerMove>();
+
+
+        if(playerMove.GetPlayerMapState() == "Map_2")
+        {
+            MapTwoDoorLamp.intensity = 0; //Puts off the light if the player is in Map 2
+        }
+        else
+        {
+            MapTwoDoorLamp.intensity = 1;  //Puts on the lamp near Map 2 if the player is not in Map 2
+        }
     }
 
     // Update is called once per frame

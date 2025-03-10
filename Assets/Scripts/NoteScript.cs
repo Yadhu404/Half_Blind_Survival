@@ -66,6 +66,12 @@ public class NoteScript : MonoBehaviour
 
     void DoorMessage(){
         if(Input.GetKeyDown("e")){
+            if(playerMove.instance.GetPlayerMapState() == "Map_2")
+            {
+                DoorMessagePanel1.SetActive(true);
+                return;
+            }
+
             if(!check.check1){
                 DoorMessagePanel.SetActive(true);
             }

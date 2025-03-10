@@ -97,6 +97,7 @@ public class playerMove : MonoBehaviour
     void OnCollisionEnter2D(Collision2D player){
         if(player.gameObject.CompareTag("Spike")){  //Decrease the health by 1
             PlayerHealth -= 1;
+            SavePlayerHealth(PlayerHealth);
         }
     }
 
@@ -139,9 +140,11 @@ public class playerMove : MonoBehaviour
 
             if(RegainHealth >= 100){
                 PlayerHealth = 100;
+                SavePlayerHealth(PlayerHealth);
             }
             else{
                 PlayerHealth = RegainHealth;
+                SavePlayerHealth(PlayerHealth);
             }
     }
 
@@ -171,5 +174,17 @@ public class playerMove : MonoBehaviour
     public String GetPlayerMapState()
     {
         return PlayerPrefs.GetString("Map_State");
+    }
+
+
+    public void SavePlayerHealth(int health)
+    {
+        PlayerPrefs.SetInt("PlayerHealth",health);
+        PlayerPrefs.Save();
+    }
+
+    public int GetPlayerHealth()
+    {
+        return PlayerPrefs.GetInt("PlayerHealth",100);
     }
 }

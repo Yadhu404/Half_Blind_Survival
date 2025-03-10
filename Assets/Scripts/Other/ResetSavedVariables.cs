@@ -27,7 +27,7 @@ public class ResetSavedVariables : MonoBehaviour
         //Reset the Invetory Data
         ResetInventory();
 
-
+        playerMove.instance.SavePlayerHealth(100); //Set the player's health to its maximum
     }
 
     public void ResetInventory()

@@ -61,9 +61,9 @@ public class PlayerPositionSet : MonoBehaviour
     {
         ResetSavedVariables.instance.ResetInventory();
 
+        playerMove.instance.SavePlayerHealth(100);    
+
         Time.timeScale = 1f;
-        
-        playerMove.PlayerHealth = 100;
         
         if(!Player.activeSelf)
         {
@@ -89,14 +89,12 @@ public class PlayerPositionSet : MonoBehaviour
         {
             Player.transform.position = new Vector2(retryPlayerPosition[1].x, retryPlayerPosition[1].y);
             Player.transform.rotation = Quaternion.Euler(0, 0, -90);
-            SceneManagersc.instance.RestartGame();
             check = true;
         }
         else if(playerMove.GetPlayerMapState() == "Map_0")
         {
             Player.transform.position = new Vector2(retryPlayerPosition[2].x, retryPlayerPosition[2].y);
             Player.transform.rotation = Quaternion.Euler(0, 0, 0);
-            SceneManagersc.instance.RestartGame();
             check = true;
         }
         else
@@ -106,9 +104,9 @@ public class PlayerPositionSet : MonoBehaviour
 
         if(check)
         {
-            playerMove.SavePlayerPosition(Player.transform.position.x,Player.transform.position.y);
-            SceneManagersc.instance.RestartGame();
             check = false;
+            playerMove.SavePlayerPosition(Player.transform.position.x,Player.transform.position.y);
+            SceneManagersc.instance.LoadToLoadScene();   
         }
     }
 }

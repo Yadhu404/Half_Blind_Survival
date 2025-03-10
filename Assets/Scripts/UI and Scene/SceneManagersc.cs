@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,32 +21,22 @@ public class SceneManagersc : MonoBehaviour
 
     public void PlayOnNewGame()
     {
-        SceneManager.LoadScene("GameScene1"); //Loading from Load Scene to Game Scene
-        Time.timeScale = 1f;
+        LoadToLoadScene(); //Loading from Load Scene to Game Scene
     }
     public void NewGame(){
         ResetSavedVariables.instance.ResetVariables();
 
-        SceneManager.LoadScene("GameScene1"); //Loading from Load Scene to Game Scene
-        Time.timeScale = 1f;
+        LoadToLoadScene(); //Loading from Load Scene to Game Scene
     }
 
     public void ContinueGame()
     {
-        SceneManager.LoadScene("GameScene1"); //Loading from Load Scene to Game Scene
-        Time.timeScale = 1f;
-    }
-
-    private IEnumerator LoadtogameScene(){
-        SceneManager.LoadScene("LoadScene"); //Loading from Home Scene to Load Scene
-
-        yield return new WaitForSeconds(0f);
-
-        SceneManager.LoadScene("GameScene1"); //Loading from Load Scene to Game Scene
+        LoadToLoadScene(); //Loading from Load Scene to Game Scene
     }
 
     public void GametoHomescene(){
         SceneManager.LoadScene("StartScene");  //Loading from game to Home scene
+        Time.timeScale = 1f;
     }
 
     public void RestartGame(){    //To restart the game.
@@ -54,4 +45,10 @@ public class SceneManagersc : MonoBehaviour
 
         Time.timeScale = 1f;
     }
+
+
+    public void LoadToLoadScene()
+    {
+        SceneManager.LoadScene("LoadScene");
+    } 
 }
